@@ -1,4 +1,4 @@
-package com.example.n1_android;
+package com.example.n2_android;
 
 import android.content.Context;
 
