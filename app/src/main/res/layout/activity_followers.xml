@@ -7,29 +7,48 @@
     tools:context="com.example.n2_android.followers">
 
     <TextView
-        android:id="@+id/txFollower"
+        android:id="@+id/idFollower"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Insira a segunda nota"
-        tools:layout_editor_absoluteX="138dp"
-        tools:layout_editor_absoluteY="232dp" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="calcular"
-        android:text="Inicio"
-        tools:layout_editor_absoluteX="154dp"
-        tools:layout_editor_absoluteY="357dp" />
+        android:layout_marginStart="172dp"
+        android:layout_marginLeft="172dp"
+        android:layout_marginTop="52dp"
+        android:text="idFollower"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
+        android:layout_marginStart="168dp"
+        android:layout_marginLeft="168dp"
+        android:layout_marginTop="92dp"
         android:text="Seguidores"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="139dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="76dp"
+        android:onClick="inicio"
+        android:text="Inicio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginFollower" />
+
+    <TextView
+        android:id="@+id/loginFollower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="162dp"
+        android:layout_marginLeft="162dp"
+        android:layout_marginTop="50dp"
+        android:text="loginFollower"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idFollower" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

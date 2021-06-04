@@ -7,55 +7,67 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.n2_android.R;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Scanner;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView txAPI;
+    TextView idAPI;
+    TextView nameAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        txAPI = (TextView)findViewById(R.id.txAPI);
-        String result = "";
+        idAPI = (TextView)findViewById(R.id.idAPI);
+        nameAPI = (TextView)findViewById(R.id.nameAPI);
 
-        try {
+        String url = "https://api.github.com/users/giselezrossi";
 
-            URL url = new URL("https://api.github.com/users/giselezrossi/");
+        UserGit usergit = new UserGit();
 
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.connect();
+        RequestQueue queue = Volley.newRequestQueue(this);
+        // prepare the Request
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // display response
+                        try {
+                            usergit.setId(response.getString("id"));
+                            usergit.setName(response.getString("name"));
 
-            int responsecode = conn.getResponseCode();
-            txAPI.setText(responsecode);
+                            //idAPI.setText(response.getString("id"));
+                            //nameAPI.setText(response.getString("name"));
 
-            if (responsecode != 200) {
-                throw new RuntimeException("HttpResponseCode: " + responsecode);
-            } else {
+                            idAPI.setText(usergit.getId());
+                            nameAPI.setText(usergit.getName());
 
-                String inline = "";
-                Scanner scanner = new Scanner(url.openStream());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
 
-                while (scanner.hasNext()) {
-                    inline += scanner.nextLine();
+                    }
                 }
+        );
 
-                scanner.close();
+        // add it to the RequestQueue
+        queue.add(getRequest);
 
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
-
 
     public void seguinte(View v){
 
